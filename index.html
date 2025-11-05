@@ -1,7 +1,3 @@
-<?php
-// index.php
-?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -74,39 +70,10 @@
     <div class="menu-container">
         <h2>Sun Slayer</h2>
         <h1>Bem-vindo jogador! <br> Teste seu valor</h1>
-        <button onclick="jogar()">Jogar</button>
-        <button onclick="opcoes()">Opções</button>
-        <button onclick="creditos()">Créditos</button>
+        <a href="jogo.html"><button>Jogar</button></a>
+        <a onclick="alert('WIP')"><button>Opções</button></a>
+        <a onclick="alert('Créditos:\nAnthony;\nJoão P. Santos; \nHigor Eduardo\nGabriel \n \nVersão 0.6');"><button>Créditos</button></a>
     </div>
-
-    <audio id="musicaFundo" loop>
-        <source src="sons/levelup.mp4" type="audio/mp4">
-        Seu navegador não suporta o elemento de áudio.
-    </audio>
-    <script>
-
-        const musica = document.getElementById('musicaFundo');
-        
-        const ciclo = 3 * 60 * 1000; // 3 minutos
-        musica.addEventListener('playing', () => {
-            setTimeout(() => {
-                musica.currentTime = 0;
-                musica.play();
-            }, ciclo);
-        });
-
-        function jogar() {
-            window.location.href = 'jogo.html';
-        }
-
-        function opcoes() {
-            alert('WIP');
-        }
-
-        function creditos() {
-            alert('Créditos:\nAnthony;\nJoão P. Santos; \nHigor Eduardo\nGabriel \n \nVersão 0.6');
-        }
-    </script>
 
 </body>
 </html>
