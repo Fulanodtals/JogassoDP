@@ -9,6 +9,10 @@
         /* === ESTILOS GERAIS E TEMA (VERMELHO E PRETO) === */
         /* ================================================= */
 
+        *{
+            transition: all 1s eases;
+        }
+        
         :root {
             --cor-principal: #c21414; /* Vermelho vibrante */
             --cor-fundo: #1a1a1a;    /* Preto escuro */
@@ -101,16 +105,10 @@
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.85); /* Fundo escuro para destacar o modal */
-            backdrop-filter: blur(8px);
+            background-color: #000000b0;
             justify-content: center;
             align-items: center;
-            animation: fadeBackground 0.3s ease-out;
-        }
-
-        @keyframes fadeBackground {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            transition: display 1.3s ease;
         }
 
         .modal-conteudo {
@@ -160,14 +158,6 @@
         .fechar-modal:focus {
             color: var(--cor-texto);
             text-decoration: none;
-        }
-
-        /* Estilo Específico: Modal de Login */
-        #modal-login .modal-conteudo {
-            /* Fundo de imagem predefinido (usando um gradiente de exemplo) */
-            background-image: linear-gradient(rgba(26, 26, 26, 0.8), rgba(26, 26, 26, 0.8)), url('https://via.placeholder.com/500x300/1a1a1a/ff0000?text=FUNDO+DE+LOGIN');
-            background-size: cover;
-            background-position: center;
         }
 
         .form-grupo {
@@ -286,7 +276,6 @@
             padding: 20px;
             border-radius: 8px;
             margin-top: 15px;
-            border: 1px solid var(--cor-principal);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -303,10 +292,8 @@
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
         }
-        .pix-qr-code span {
-            color: #000;
-            font-size: 0.8em;
-            font-weight: bold;
+        .pix-qr-code img {
+            width: 100%;
         }
 
         .pix-copia-cola {
@@ -446,11 +433,11 @@
 
             <div class="pix-area">
                 <div class="pix-qr-code">
-                    <span>QR Code PIX</span>
+                    <img src="qrcode_pix.png" alt="qrcode_pix">
                 </div>
                 
                 <div class="pix-copia-cola" id="pix-key">
-                    00020126330014BR.GOV.BC.PIX01111234567890053039865802BR5915NOME DO DEST.6008CIDADE SP62250521ABCDEFGHIJKLMN.56789
+                    00020126880014BR.GOV.BCB.PIX013694e1f445-24b1-401f-8e30-9f127a14bfd60226Ajuda para o desenvolvedor5204000053039865802BR5921Joao Pedro dos Santos6009SAO PAULO62140510QN0Td7UIOh63046261
                 </div>
                 
                 <button class="btn-copiar" onclick="copiarPix()">Copiar Pix Copia e Cola</button>
@@ -464,6 +451,7 @@
         function abrirModal(idModal) {
             const modal = document.getElementById('modal-' + idModal);
             if (modal) {
+                document.body.style.backgroundImage = "url('pg_bg.png')";
                 modal.style.display = 'flex'; // Exibe o modal
             }
         }
@@ -472,6 +460,7 @@
         function fecharModal(idModal) {
             const modal = document.getElementById('modal-' + idModal);
             if (modal) {
+                document.body.style.backgroundImage = "url('indexBG.png')";
                 modal.style.display = 'none'; // Esconde o modal
             }
         }

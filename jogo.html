@@ -312,7 +312,9 @@
     const playerImg = new Image(); playerImg.src = 'personagens/yoriichi.png'; // imagem do jogador
     const bulletImg = new Image(); bulletImg.src = 'sun.png'; // imagem da bala
     
-    const shootSound = new Audio('tiro.mp3'); //a rquivo do tiro
+    const shootSound = new Audio('sons/tiro.mp3'); //som do tiro
+    const hitSound = new Audio('sons/dano.mp3'); //som do dano
+    const deadSound = new Audio('sons/morte_inimigo.mp3'); //som da morte
 
     // Canvas full screen
     const canvas = document.getElementById('gameCanvas'); // pega o elemento canvas
@@ -343,7 +345,7 @@
     let maxLives = 100; // maximo de vidas
     let lives = 100; // vidas iniciais
     let gameSpeed = 2; // velocidade base de queda dos objetos
-    let spawnInterval = 200; // intervalo de spawn em ms
+    let spawnInterval = 500; // intervalo de spawn em ms
     let lastSpawn = 0; // timestamp do último spawn
     let lastTime = 0; // timestamp do último frame
     let running = true; // flag para saber se o jogo está rodando
@@ -372,6 +374,8 @@
       window.addEventListener('mousedown', e => {
         keys[e.key] = true;
         if (e.button === 0) { 
+          shootSound.currentTime = 0; // reinicia o som caso ele ainda esteja tocando
+          shootSound.play(); // toca o som
           shoot(); // chama a funcao de tiro
         }
       });
@@ -533,9 +537,6 @@
     
     // Atirar
     function shoot() {
-      //shootSound.currentTime = 0; // reinicia o som caso ele ainda esteja tocando
-      //shootSound.play();           // toca o som
-
       const closestEnemy = findClosestEnemy();
       let dirX, dirY;
       
@@ -622,6 +623,8 @@
           if (o.dangerous) {
             lives -= (o.enemyDamage - defense);
             objects.splice(i, 1);
+            hitSound.play(); 
+
             if (lives <= 0) endGame();
           } else {
             score += (o.points + mana);
@@ -659,6 +662,7 @@
             objects[j].life -= playerDamage
             if(objects[j].life <= 0){
               objects.splice(j,1);
+              deadSound.play();
             }
             bullets.splice(i,1);
             break;
